@@ -12,7 +12,7 @@ pipeline {
                 checkout([$class: 'GitSCM',
                     branches: [[name: "$BRANCH_NAME"]],
                     userRemoteConfigs: [[
-                        url: 'https://github.com/akshaysharma25/Assets_management.git',
+                        url: 'https://github.com/akshaysharma25/akshayprod.git',
                         credentialsId: 'GIT_CRED'
                     ]]
                 ])
