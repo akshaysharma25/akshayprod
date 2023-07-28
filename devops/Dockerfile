@@ -7,9 +7,10 @@ COPY vprofile-project-local-setup /home/vprofile-project-local-setup
 RUN cd vprofile-project-local-setup && mvn install
 
 # Stage 2: Create the final image with Tomcat
-FROM tomcat
+FROM tomcat:9.0.78-jdk8-corretto-al2
 WORKDIR /usr/local/tomcat
 RUN rm -rf /webapps/*
-ADD --from=BUILD_IMAGE /home/vprofile-project-local-setup/target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
+COPY --from=BUILD_IMAGE /home/vprofile-project-local-setup/target/vprofile-v2.war /usr/local/tomcat
+COPY ROOT.war 
 EXPOSE 8080
 CMD ["catalina.sh", "run"]
