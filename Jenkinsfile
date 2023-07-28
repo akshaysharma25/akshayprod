@@ -18,42 +18,16 @@ pipeline {
                 ])
             }
         }
-
-        stage('Read Version Tags') {
-            steps {
-                script {
-                    // Read the last line of file1.txt and store it in the 'versionTags' variable
-                    versionTags = sh(script: "tail -n 1 test", returnStdout: true).trim()
-                }
-            }
-        }
-
-        stage('Build1') {
-            steps {
-                // Use the 'versionTags' variable as needed in the build steps
-                echo "Building version: $versionTags"
-                // Other build steps
-            }
-        }
         
         stage('Building Docker Image'){
         	steps {
         		sh 	'''
-        			docker build . -f devops/Dockerfile -t appimg:${versionTags}-akshay-${BUILD_NUMBER}
+                    akshay=$(cat test | awk '{$1=$1};1' | sed '/^$/d' | tail -1 | tr -d '\r\n')
+                    echo "value of var is = $akshay"
+        			docker build . -f devops/Dockerfile -t appimg:akshay-"$akshay"
                     '''
             }
         }
-
-        stage('Build') {
-            steps {
-                // Use the 'versionTags' variable as needed in the build steps
-                echo "Building version: $versionTags"
-                // Other build steps
-            }
-        }
-
-        // Other stages in your pipeline
-        // ...
     }
 
     post {
