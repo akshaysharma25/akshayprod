@@ -28,7 +28,7 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build1') {
             steps {
                 // Use the 'versionTags' variable as needed in the build steps
                 echo "Building version: $versionTags"
