@@ -28,10 +28,18 @@ pipeline {
             }
         }
 
+        stage('Build') {
+            steps {
+                // Use the 'versionTags' variable as needed in the build steps
+                echo "Building version: $versionTags"
+                // Other build steps
+            }
+        }
+        
         stage('Building Docker Image'){
         	steps {
         		sh 	'''
-        			docker build . -f devops/Dockerfile -t appimg:${env.BUILD_NUMBER}-akshay-${env.versionTags}
+        			docker build . -f devops/Dockerfile -t appimg:${BUILD_NUMBER}-akshay-${versionTags}
                     '''
             }
         }
