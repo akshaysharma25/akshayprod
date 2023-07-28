@@ -33,7 +33,7 @@ pipeline {
                         sh '''
                             echo "$akshay"
                             echo "$BRANCH_NAME"
-                            docker build . -f devops/Dockerfile -t dockerimage-$BRANCH_NAME-$akshay
+                            docker build . -f devops/Dockerfile -t dockerimage:$BRANCH_NAME-$akshay
                         '''
                     } else if ("$BRANCH_NAME" == "develop") {
                     sh '''   echo "$akshay"
