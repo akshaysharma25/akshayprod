@@ -31,7 +31,7 @@ pipeline {
         stage('Building Docker Image'){
         	steps {
         		sh 	'''
-        			docker build . -f devops/Dockerfile -t appimg:$BUILD_NUMBER-akshay-"$versionTags"
+        			docker build . -f devops/Dockerfile -t appimg:${env.BUILD_NUMBER}-akshay-${env.versionTags}
                     '''
             }
         }
