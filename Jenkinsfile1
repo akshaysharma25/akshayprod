@@ -31,6 +31,7 @@ pipeline {
 
                     if ("$BRANCH_NAME" == "master") {
                         sh '''
+                            akshay=$(cat test | awk '{$1=$1};1' | sed '/^$/d' | tail -1 | tr -d '\r\n')
                             echo "$akshay"
                             echo "$BRANCH_NAME"
                             docker build . -f devops/Dockerfile -t dockerimage:$BRANCH_NAME-$akshay
