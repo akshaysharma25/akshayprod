@@ -32,18 +32,8 @@ pipeline {
         	steps {
         		sh 	'''
         			docker build . -f devops/Dockerfile -t appimg:$BUILD_NUMBER-akshay
-        			
-        			'''
-   
-
-
-
-
-        	}
-
-
-
-
+                    '''
+            }
         }
 
         stage('Build') {
