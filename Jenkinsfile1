@@ -37,6 +37,7 @@ pipeline {
                             docker login akshayreg.azurecr.io -u akshayreg -p IN7cAKS8+YKjjwKOf3PoUr8u7vKMqotBIikKADFobc+ACRCHCgpM
                             docker build . -f devops/Dockerfile -t akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
                             docker push akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
+                            helm upgrade testapp first_app --set image.tag=$BRANCH_NAME-$akshay -n prod --kubeconfig config1
                         '''
                     } else if ("$BRANCH_NAME" == "develop") {
                     sh '''  akshay=$(cat test | awk '{$1=$1};1' | sed '/^$/d' | tail -1 | tr -d '\r\n') 
@@ -45,6 +46,7 @@ pipeline {
                             docker login akshayreg.azurecr.io -u akshayreg -p IN7cAKS8+YKjjwKOf3PoUr8u7vKMqotBIikKADFobc+ACRCHCgpM
                             docker build . -f devops/Dockerfile -t akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
                             docker push akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
+                            helm upgrade testapp first_app --set image.tag=$BRANCH_NAME-$akshay -n test --kubeconfig config2
                             '''                    
                         
                     }
