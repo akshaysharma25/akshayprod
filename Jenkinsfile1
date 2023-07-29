@@ -34,15 +34,17 @@ pipeline {
                             akshay=$(cat test | awk '{$1=$1};1' | sed '/^$/d' | tail -1 | tr -d '\r\n')
                             echo "$akshay"
                             echo "$BRANCH_NAME"
-                            docker login akshayreg.azurecr.io -u akshayreg -p e1JVqKB884/fyiFgQ+N64pLqAoGb5qzIn6pr3vXTf4+ACRAJlewA
+                            docker login akshayreg.azurecr.io -u akshayreg -p IN7cAKS8+YKjjwKOf3PoUr8u7vKMqotBIikKADFobc+ACRCHCgpM
                             docker build . -f devops/Dockerfile -t akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
+                            docker push akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
                         '''
                     } else if ("$BRANCH_NAME" == "develop") {
                     sh '''  akshay=$(cat test | awk '{$1=$1};1' | sed '/^$/d' | tail -1 | tr -d '\r\n') 
                             echo "$akshay"
                             echo "$BRANCH_NAME"
-                            docker login akshayreg.azurecr.io -u akshayreg -p e1JVqKB884/fyiFgQ+N64pLqAoGb5qzIn6pr3vXTf4+ACRAJlewA
+                            docker login akshayreg.azurecr.io -u akshayreg -p IN7cAKS8+YKjjwKOf3PoUr8u7vKMqotBIikKADFobc+ACRCHCgpM
                             docker build . -f devops/Dockerfile -t akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
+                            docker push akshayreg.azurecr.io/apping:$BRANCH_NAME-$akshay
                             '''                    
                         
                     }
